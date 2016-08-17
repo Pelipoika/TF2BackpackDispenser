@@ -1,0 +1,16 @@
+"Games"
+{
+	/* Team Fortress 2 */
+	"tf"
+	{
+		"Offsets"
+		{
+			"CBaseObject::MakeCarriedObject"	//CBaseObject::MakeCarriedObject(CTFPlayer *)
+			{
+				"windows"	"378"
+				"linux"		"379"
+				"mac"		"379"
+			}
+		}
+	}
+}
