@@ -81,6 +81,10 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 {
 	if (client > 0 && client <= MaxClients && IsClientInGame(client) && TF2_GetPlayerClass(client) == TFClass_Engineer)
 	{
+		//When playing MvM we don't want blue engineers to be able to carry dispensers
+		if(GameRules_GetProp("m_bPlayingMannVsMachine") && TF2_GetClientTeam(client) != TFTeam_Red)
+			return Plugin_Changed;
+	
 		if(g_CarriedDispenser[client] == INVALID_ENT_REFERENCE)
 		{
 			if(buttons & IN_RELOAD && GetEntProp(client, Prop_Send, "m_bCarryingObject") != 1)
