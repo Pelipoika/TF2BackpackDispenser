@@ -2,7 +2,6 @@
 #include <sdkhooks>
 #include <tf2>
 #include <tf2_stocks>
-#include <tf2items>
 
 #pragma newdecls required
 
@@ -103,7 +102,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 		}
 		else if(g_CarriedDispenser[client] != INVALID_ENT_REFERENCE)
 		{
-			if((buttons & IN_RELOAD && buttons & IN_ATTACK2) && g_CarriedDispenser[client] != INVALID_ENT_REFERENCE)
+			if((buttons & IN_RELOAD && buttons & IN_ATTACK2) && GetEntProp(client, Prop_Send, "m_bCarryingObject") == 0 && g_CarriedDispenser[client] != INVALID_ENT_REFERENCE)
 			{
 				UnequipDispenser(client);
 			}
