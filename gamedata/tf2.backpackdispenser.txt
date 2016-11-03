@@ -7,8 +7,8 @@
 		{
 			"CBaseObject::MakeCarriedObject"	//CBaseObject::MakeCarriedObject(CTFPlayer *)
 			{
-				"windows"	"378"
-				"linux"		"380"
+				"windows"	"379"
+				"linux"		"381"
 			}
 		}
 	}
