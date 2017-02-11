@@ -68,7 +68,6 @@ public void OnEntityDestroyed(int iEntity)
 					
 					g_CarriedDispenser[builder] = INVALID_ENT_REFERENCE;
 					
-					SetEntPropFloat(builder, Prop_Send, "m_flMaxspeed", 300.0);
 					TF2_RemoveCondition(builder, TFCond_MarkedForDeath);
 				}
 			}
@@ -168,9 +167,8 @@ stock void EquipDispenser(int client, int target)
 		SetEntPropVector(target, Prop_Send, "m_vecOrigin", pPos);
 		SetEntPropVector(target, Prop_Send, "m_angRotation", pAng);
 		
-		SetEntProp(target, Prop_Send, "m_usSolidFlags", 2);
-		
-		SetEntPropFloat(client, Prop_Send, "m_flMaxspeed", 200.0);
+		SetEntProp(target, Prop_Send, "m_nSolidType", 0);
+		SetEntProp(target, Prop_Send, "m_usSolidFlags", 0x0004);
 		
 		TF2_AddCondition(client, TFCond_MarkedForDeath, -1.0);
 		
@@ -195,6 +193,8 @@ stock void UnequipDispenser(int client)
 		SetEntProp(Dispenser, Prop_Send, "m_bCarryDeploy", 0);
 		SetEntProp(Dispenser, Prop_Send, "m_iDesiredBuildRotations", 0);
 		SetEntProp(Dispenser, Prop_Send, "m_iUpgradeLevel", 1);
+		SetEntProp(Dispenser, Prop_Send, "m_nSolidType", 2);
+		SetEntProp(Dispenser, Prop_Send, "m_usSolidFlags", 0);
 
 		SetEntityModel(Dispenser, DISPENSER_BLUEPRINT); 
 
@@ -208,7 +208,6 @@ stock void UnequipDispenser(int client)
 			AcceptEntityInput(iLink, "Kill");
 			
 			TF2_RemoveCondition(client, TFCond_MarkedForDeath);
-			TF2_AddCondition(client, TFCond_SpeedBuffAlly, 0.0);
 		}
 
 		g_CarriedDispenser[client] = INVALID_ENT_REFERENCE;
@@ -230,7 +229,6 @@ stock void DestroyDispenser(int client)
 			AcceptEntityInput(Dispenser, "RemoveHealth");
 			
 			TF2_RemoveCondition(client, TFCond_MarkedForDeath);
-			TF2_AddCondition(client, TFCond_SpeedBuffAlly, 0.0);
 			
 			g_CarriedDispenser[client] = INVALID_ENT_REFERENCE;
 		}
