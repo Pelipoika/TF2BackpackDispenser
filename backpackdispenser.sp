@@ -6,6 +6,7 @@
 #pragma newdecls required
 
 #define DISPENSER_BLUEPRINT	"models/buildables/dispenser_blueprint.mdl"
+#define MODEL_EMPTY "models/empty.mdl"
 
 int g_CarriedDispenser[MAXPLAYERS+1];
 
@@ -41,6 +42,11 @@ public void OnPluginStart()
 public void OnClientPutInServer(int client)
 {
 	g_CarriedDispenser[client] = INVALID_ENT_REFERENCE;
+}
+
+public void OnMapStart()
+{
+	PrecacheModel(MODEL_EMPTY);
 }
 
 public void OnEntityDestroyed(int iEntity)
@@ -241,10 +247,7 @@ stock int CreateLink(int iClient)
 	DispatchKeyValue(iLink, "targetname", "DispenserLink");
 	DispatchSpawn(iLink); 
 	
-	char strModel[PLATFORM_MAX_PATH];
-	GetEntPropString(iClient, Prop_Data, "m_ModelName", strModel, PLATFORM_MAX_PATH);
-	
-	SetEntityModel(iLink, strModel);
+	SetEntityModel(iLink, MODEL_EMPTY);
 	
 	SetEntProp(iLink, Prop_Send, "m_fEffects", 16|64);
 	
